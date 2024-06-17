@@ -27,6 +27,7 @@ func processRequest(tx types.Transaction, req *http.Request) (*types.Interruptio
 		client = req.RemoteAddr[:idx]
 		cport, _ = strconv.Atoi(req.RemoteAddr[idx+1:])
 	}
+	client = req.Header.Get("X-Real-IP")
 
 	var in *types.Interruption
 	// There is no socket access in the request object, so we neither know the server client nor port.
